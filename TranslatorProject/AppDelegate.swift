@@ -13,7 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        Model().translate(text: "Hello, I'm start text", toLanguage: "ru") { translatedText, error in
+          print("TranslatedText = \(translatedText)")
+        }
         return true
     }
 
