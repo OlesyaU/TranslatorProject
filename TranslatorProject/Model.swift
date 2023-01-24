@@ -6,6 +6,10 @@
 //
 
 import Foundation
+// для того, чтобы использовать JSON Encodable (закодировать наши данные для отправки и запроса)создадим структуру
+struct Parameters: Encodable {
+    var text: String
+}
 
 /*
  [
@@ -46,10 +50,10 @@ struct Model {
             "X-RapidAPI-Key": "faeee96b5cmsh1f02c9ad3ed5f6fp193e5djsn32e65654d822",
             "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com"
         ]
-        
-        let parameters = [["Text": text]] as [[String : Any]]
-        
-        let postData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        //        тут две даты поскольку двумя вариантами запрос отправляем(кодируем дату)
+        let postData = try! JSONEncoder().encode([Parameters(text: text)])
+        //        let parameters = [["Text": text]] as [[String : Any]]
+        //        let postData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         let request = NSMutableURLRequest(url: NSURL(string: "https://microsoft-translator-text.p.rapidapi.com/translate?to%5B0%5D=\(toLanguage)&api-version=3.0&profanityAction=NoAction&textType=plain")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
